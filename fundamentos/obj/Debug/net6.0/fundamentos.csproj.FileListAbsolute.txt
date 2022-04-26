@@ -1,0 +1,15 @@
+C:\AplicacionesXamarin\fundamentos\fundamentos\bin\Debug\net6.0\fundamentos.exe
+C:\AplicacionesXamarin\fundamentos\fundamentos\bin\Debug\net6.0\fundamentos.deps.json
+C:\AplicacionesXamarin\fundamentos\fundamentos\bin\Debug\net6.0\fundamentos.runtimeconfig.json
+C:\AplicacionesXamarin\fundamentos\fundamentos\bin\Debug\net6.0\fundamentos.dll
+C:\AplicacionesXamarin\fundamentos\fundamentos\bin\Debug\net6.0\fundamentos.pdb
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.csproj.AssemblyReference.cache
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.GeneratedMSBuildEditorConfig.editorconfig
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.AssemblyInfoInputs.cache
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.AssemblyInfo.cs
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.csproj.CoreCompileInputs.cache
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.dll
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\refint\fundamentos.dll
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.pdb
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\fundamentos.genruntimeconfig.cache
+C:\AplicacionesXamarin\fundamentos\fundamentos\obj\Debug\net6.0\ref\fundamentos.dll
