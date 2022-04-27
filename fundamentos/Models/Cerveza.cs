@@ -9,7 +9,7 @@ namespace fundamentos.Models
     internal class Cerveza:Bebida
     {
         //el ctor es un metodo
-        public Cerveza():base("cerveza",2000)
+        public Cerveza(int Cantidad, string Nombre="Cervezas"):base(Nombre, Cantidad)
         {
 
         }
