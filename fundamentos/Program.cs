@@ -53,6 +53,14 @@ namespace fundamentos
                 Console.WriteLine(item.Nombre);
             }
 
+
+            var bebidaAlcoholica = new vino(100);
+            MostrarRecomendacion(bebidaAlcoholica);
+
         }
+            static void MostrarRecomendacion(IBebidaAlcoholica bebida)
+            {
+                bebida.MaxRecomendado();
+            }
     }
 }
