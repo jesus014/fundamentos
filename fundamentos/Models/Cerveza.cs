@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace fundamentos.Models
 {
-    internal class Cerveza:Bebida,IBebidaAlcoholica
+    internal class Cerveza : Bebida, IBebidaAlcoholica
     {
         public int Alcohol { get; set; }
 
-
+        public string Marca { get; set; }
 
         //el ctor es un metodo
         public Cerveza(int Cantidad, string Nombre="Cervezas"):base(Nombre, Cantidad)

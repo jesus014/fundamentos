@@ -57,10 +57,21 @@ namespace fundamentos
             var bebidaAlcoholica = new vino(100);
             MostrarRecomendacion(bebidaAlcoholica);
 
+            CervezaBD cervezaBD = new CervezaBD();
+            var cervezas1 =  cervezaBD.Get();
+
+            foreach (var ce in cervezas1)
+            {
+                Console.WriteLine(ce.Nombre);
+            }
+            
+
         }
             static void MostrarRecomendacion(IBebidaAlcoholica bebida)
             {
                 bebida.MaxRecomendado();
             }
+
+
     }
 }
