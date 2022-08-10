@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using fundamentos.Models;
+using System.Text.Json;
 
 namespace fundamentos
 {
@@ -7,71 +8,56 @@ namespace fundamentos
     {
         static void Main(string[] args)
         {
-            Bebida bebida = new Bebida("coca", 100);
-            bebida.Beberse(50);
-            Console.WriteLine(bebida.Nombre);
-            Console.WriteLine(bebida.Cantidad);
+
+            //CervezaBD cervezaBD = new CervezaBD();
+            ////agregar datos 
+            //{
+            //    //los dos primeros datos estan en el constructor
+
+            //    Cerveza cerveza = new Cerveza(20, "tecate");
+            //    cerveza.Marca = "otra";
+            //    cerveza.Alcohol = 5;
+            //    cervezaBD.Add(cerveza);
+
+            //}
+
+            ////editar cerveza
+            //{
+
+            //    Cerveza cerveza = new Cerveza(20, "tecate");
+            //    cerveza.Marca = "otra";
+            //    cerveza.Alcohol = 20;
+            //    cervezaBD.Edit(cerveza, 4);
+            //}
 
 
-            Cerveza cerveza = new Cerveza(20);
-            Console.WriteLine(cerveza.Nombre);
-            cerveza.Beberse(12);
-            Console.WriteLine(cerveza.Cantidad);
+            ////obtener datos
+            //var cervezas = cervezaBD.Get();
+            //foreach (var ce in cervezas)
+            //{
+            //    Console.WriteLine(ce.Nombre);
+            //    Console.WriteLine(ce.Cantidad);
+            //}
 
-            int[] numeros = new int[2];
-            int[] numeross = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                Console.WriteLine(i);
-            }
-
-            foreach (var item in numeross)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-            List<int> lista = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
-            lista.Add(9);
-            lista.Add(0);
-            lista.Remove(2);
-
-            foreach (var item in lista)
-            {
-                Console.WriteLine(item);
-            }
-
-            List<Cerveza> cervezas = new List<Cerveza>() { new Cerveza(20) };
-            cervezas.Add(new Cerveza(500));
-            Cerveza cheve = new Cerveza(500, "cerveza artesanalk");
-            cervezas.Add(cheve);
-
-            foreach (var item in cervezas)
-            {
-                Console.WriteLine(item.Cantidad);
-                Console.WriteLine(item.Nombre);
-            }
+            ////eliminar
+            //{
 
 
-            var bebidaAlcoholica = new vino(100);
-            MostrarRecomendacion(bebidaAlcoholica);
+            //    cervezaBD.Delete(4);
+            //}
 
-            CervezaBD cervezaBD = new CervezaBD();
-            var cervezas1 =  cervezaBD.Get();
-
-            foreach (var ce in cervezas1)
-            {
-                Console.WriteLine(ce.Nombre);
-            }
+           
+                
             
+            //Cerveza cerveza = new Cerveza(10, "cerzveza");
+            //string miJson = JsonSerializer.Serialize(cerveza);
+            //File.WriteAllText("objeto.txt", miJson);
+
+            string miJson= File.ReadAllText("objeto.txt");
+            Cerveza cerveza=JsonSerializer.Deserialize<Cerveza>(miJson);
+
 
         }
-            static void MostrarRecomendacion(IBebidaAlcoholica bebida)
-            {
-                bebida.MaxRecomendado();
-            }
-
 
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace fundamentos.Models
 {
-     class vino : Bebida, IBebidaAlcoholica
+    //Se tiene herencia de la classe bebida y de la interfaz IBebida alcoholica
+     class Vino : Bebida, IBebidaAlcoholica
     {
         public int Alcohol { get; set; }
 
-        public vino(int Cantidad, string Nombre = "Vinos") : base(Nombre, Cantidad)
+        public Vino(int Cantidad, string Nombre = "Vinos") : base(Nombre, Cantidad)
         {
 
         }

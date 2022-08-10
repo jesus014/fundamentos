@@ -11,7 +11,8 @@ namespace fundamentos.Models
         public string Nombre { get; set; }
         public int   Cantidad { get; set; }
         
-        //el ctor es un metodo
+        //el ctor es un metodo que se inicializa. 
+        //se reciben en ctor.
         public Bebida(string Nombre, int Cantidad)
         {
             this.Nombre = Nombre;

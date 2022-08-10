@@ -41,5 +41,75 @@ namespace fundamentos.Models
             }
             return cervezas;
         }
+
+
+        //se agregan al bd
+
+        public void Add(Cerveza cerveza)
+        {
+            string query = "insert into cerveza(nombre, marca, alcohol, cantidad)" +
+                "values (@nombre, @marca, @alcohol, @cantidad)"; 
+            
+            using (var connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@nombre",cerveza.Nombre);
+                command.Parameters.AddWithValue("@marca", cerveza.Marca);
+                command.Parameters.AddWithValue("@alcohol", cerveza.Alcohol);
+                command.Parameters.AddWithValue("@cantidad", cerveza.Cantidad);
+                connection.Open();
+                command.ExecuteNonQuery();
+
+
+                connection.Close();
+            }
+        }
+
+        //se editan al bd 
+
+        public void Edit(Cerveza cerveza, int Id)
+        {
+            string query = "update cerveza set nombre=@nombre, " +
+                "marca=@marca, alcohol=@alcohol, cantidad=@cantidad " +
+                "where id=@id";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@nombre", cerveza.Nombre);
+                command.Parameters.AddWithValue("@marca", cerveza.Marca);
+                command.Parameters.AddWithValue("@alcohol", cerveza.Alcohol);
+                command.Parameters.AddWithValue("@cantidad", cerveza.Cantidad);
+                command.Parameters.AddWithValue("@id", Id);
+                connection.Open();
+                command.ExecuteNonQuery();
+
+
+                connection.Close();
+            }
+        }
+
+        //se elimina al bd recibiendo el id
+
+        public void Delete( int Id)
+        {
+            string query = "delete from cerveza " +
+                "where id=@id";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                
+                command.Parameters.AddWithValue("@id", Id);
+                connection.Open();
+                command.ExecuteNonQuery();
+
+
+                connection.Close();
+            }
+        }
+
+
     }
 }
