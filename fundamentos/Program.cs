@@ -6,7 +6,7 @@ namespace fundamentos
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             //CervezaBD cervezaBD = new CervezaBD();
@@ -46,15 +46,67 @@ namespace fundamentos
             //    cervezaBD.Delete(4);
             //}
 
-           
-                
-            
+
+
+            // SE PUEDE CREAR UN JSON 
+
             //Cerveza cerveza = new Cerveza(10, "cerzveza");
             //string miJson = JsonSerializer.Serialize(cerveza);
             //File.WriteAllText("objeto.txt", miJson);
 
-            string miJson= File.ReadAllText("objeto.txt");
-            Cerveza cerveza=JsonSerializer.Deserialize<Cerveza>(miJson);
+            //Se desiariliza el json a un objeto.
+
+            //string miJson= File.ReadAllText("objeto.txt");
+            //Cerveza cerveza=JsonSerializer.Deserialize<Cerveza>(miJson);
+
+            //solicitudes http a un webService  
+            string url = "https://jsonplaceholder.typicode.com/posts";
+            HttpClient client = new HttpClient();
+
+            //metodo async
+            var httpResponse = await  client.GetAsync(url);
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var content = await httpResponse.Content.ReadAsStringAsync();
+
+                List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content);
+
+            }
+
+
+            //metodo post a un servicio.
+
+            Post post = new Post()
+            {
+                userId = 1,
+                body = "hola hola",
+                title = "hola bye",
+            };
+
+            //obtjeto a json
+            var data = JsonSerializer.Serialize<Post>(post);
+            HttpContent content1 = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+            var httpResponse1 = await client.PostAsync(url, content1);
+
+            if (httpResponse1.IsSuccessStatusCode)
+            {
+
+                var result = await httpResponse1.Content.ReadAsStringAsync();
+                var postResult = JsonSerializer.Deserialize<Post>(result);
+            }
+
+
+            //metodo para eliminar service
+            //a la url se le puede agregar un 1. 
+            var httpResponse2 = await client.DeleteAsync(url);
+
+            if (httpResponse2.IsSuccessStatusCode)
+            {
+
+                var result = await httpResponse2.Content.ReadAsStringAsync();
+                //var postResult = JsonSerializer.Deserialize<Post>(result);
+            }
 
 
         }
