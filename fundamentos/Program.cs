@@ -60,53 +60,71 @@ namespace fundamentos
             //Cerveza cerveza=JsonSerializer.Deserialize<Cerveza>(miJson);
 
             //solicitudes http a un webService  
-            string url = "https://jsonplaceholder.typicode.com/posts";
-            HttpClient client = new HttpClient();
+            //string url = "https://jsonplaceholder.typicode.com/posts";
+            //HttpClient client = new HttpClient();
 
             //metodo async
-            var httpResponse = await  client.GetAsync(url);
+            //var httpResponse = await  client.GetAsync(url);
 
-            if (httpResponse.IsSuccessStatusCode)
-            {
-                var content = await httpResponse.Content.ReadAsStringAsync();
+            //if (httpResponse.IsSuccessStatusCode)
+            //{
+            //    var content = await httpResponse.Content.ReadAsStringAsync();
 
-                List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content);
+            //    List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content);
 
-            }
+            //}
 
 
             //metodo post a un servicio.
 
-            Post post = new Post()
-            {
-                userId = 1,
-                body = "hola hola",
-                title = "hola bye",
-            };
+            //Post post = new Post()
+            //{
+            //    userId = 1,
+            //    body = "hola hola",
+            //    title = "hola bye",
+            //};
 
             //obtjeto a json
-            var data = JsonSerializer.Serialize<Post>(post);
-            HttpContent content1 = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
-            var httpResponse1 = await client.PostAsync(url, content1);
+            //var data = JsonSerializer.Serialize<Post>(post);
+            //HttpContent content1 = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+            //var httpResponse1 = await client.PostAsync(url, content1);
 
-            if (httpResponse1.IsSuccessStatusCode)
-            {
+            //if (httpResponse1.IsSuccessStatusCode)
+            //{
 
-                var result = await httpResponse1.Content.ReadAsStringAsync();
-                var postResult = JsonSerializer.Deserialize<Post>(result);
-            }
+            //    var result = await httpResponse1.Content.ReadAsStringAsync();
+            //    var postResult = JsonSerializer.Deserialize<Post>(result);
+            //}
 
 
             //metodo para eliminar service
             //a la url se le puede agregar un 1. 
-            var httpResponse2 = await client.DeleteAsync(url);
+            //var httpResponse2 = await client.DeleteAsync(url);
 
-            if (httpResponse2.IsSuccessStatusCode)
-            {
+            //if (httpResponse2.IsSuccessStatusCode)
+            //{
 
-                var result = await httpResponse2.Content.ReadAsStringAsync();
-                //var postResult = JsonSerializer.Deserialize<Post>(result);
-            }
+            //    var result = await httpResponse2.Content.ReadAsStringAsync();
+            //var postResult = JsonSerializer.Deserialize<Post>(result);
+            //}
+
+
+            //Generics 
+            var cerveza = new Cerveza()
+            { Alcohol = 10, Cantidad = 100, Marca = "mexico", Nombre = "mm,m" };
+
+
+            Service.sendRequest<Cerveza> service = new Service.sendRequest<Cerveza>();
+            var CervezaRespuesta= await service.Send(cerveza);
+
+
+            var post = new Post()
+            { body = "hola", title = "asas", userId = 212 };
+            
+            Service.sendRequest<Post> service2 = new Service.sendRequest<Post>();
+            var CervezaRespuestaa = await service2.Send(post);
+
+
 
 
         }

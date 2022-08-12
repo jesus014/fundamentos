@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace fundamentos.Models
 {
     //Clase que sirve para usar servicio. 
-    public class Post
+    public class Post: IRequest
     {
         public int userId { get; set; }
 
