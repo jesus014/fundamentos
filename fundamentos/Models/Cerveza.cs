@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace fundamentos.Models
 {
-    internal class Cerveza : Bebida, IBebidaAlcoholica, IRequest
+    public class Cerveza : Bebida, IBebidaAlcoholica, IRequest
     {
         //Se tiene herencia de la classe bebida y de la interfaz IBebida alcoholica
         public int Alcohol { get; set; }

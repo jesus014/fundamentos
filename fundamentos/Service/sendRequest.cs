@@ -12,7 +12,7 @@ namespace fundamentos.Service
         //atributo privado.
         private HttpClient _httpClient = new HttpClient();
 
-
+        //uso de clases genericas
         public async Task<T> Send(T model)
         {
             
