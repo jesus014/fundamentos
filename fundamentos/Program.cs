@@ -1,11 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using fundamentos.Errors;
 using fundamentos.Models;
+using fundamentos.Service;
 using System.Text.Json;
 
 namespace fundamentos
 {
     class Program
     {
+         public delegate string Mostrar(string cadena);
+
         static async Task Main(string[] args)
         {
 
@@ -125,71 +129,71 @@ namespace fundamentos
             //var CervezaRespuestaa = await service2.Send(post);
 
 
-            List<int> numeros = new List<int> { 1, 2, 3, 4, 5 };
+            //List<int> numeros = new List<int> { 1, 2, 3, 4, 5 };
 
-            var numero5 = numeros.Where(x => x == 7).FirstOrDefault();
-            Console.WriteLine(numero5);
+            //var numero5 = numeros.Where(x => x == 7).FirstOrDefault();
+            //Console.WriteLine(numero5);
 
-            var numerosOrdenados = numeros.OrderBy(x => x);
+            //var numerosOrdenados = numeros.OrderBy(x => x);
 
-            foreach (var item in numerosOrdenados)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in numerosOrdenados)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            var total = numeros.Sum(d=>d);  
-            Console.WriteLine(total);
-
-
-            List<Cerveza> cervezas = new List<Cerveza>()
-            {
-                new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
-                new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve2", Marca="vadfasdf3"},
-                new Cerveza(){Alcohol=234, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
+            //var total = numeros.Sum(d=>d);  
+            //Console.WriteLine(total);
 
 
-            };
-
-            var cervezasOrdenadas = from d in cervezas orderby d.Marca select d;
-
-            foreach (var item in cervezasOrdenadas)
-            {
-                Console.WriteLine($"{item.Marca}");
-            }
-
-            var cervezasOrdening = cervezas.OrderBy(x => x.Marca);
+            //List<Cerveza> cervezas = new List<Cerveza>()
+            //{
+            //    new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
+            //    new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve2", Marca="vadfasdf3"},
+            //    new Cerveza(){Alcohol=234, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
 
 
-            //Linq mas detallado.
-            //Se utiliza para realizar consultas.
+            //};
 
-            List<Bar> bares = new List<Bar>()
-            {
-                new Bar ("el bar")
-                {
-                    CervezaList = new List<Cerveza>()
-                    {
-                        new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
-                        new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve2", Marca="vadfasdf3"},
-                        new Cerveza(){Alcohol=234, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
+            //var cervezasOrdenadas = from d in cervezas orderby d.Marca select d;
 
-                    }
-                },
+            //foreach (var item in cervezasOrdenadas)
+            //{
+            //    Console.WriteLine($"{item.Marca}");
+            //}
 
-                new Bar ("el bar2")
-                {
-                    CervezaList = new List<Cerveza>()
-                    {
-                        new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve3", Marca="vadfasdf"},
-                        new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve4", Marca="vadfasdf3"},
-                        new Cerveza(){Alcohol=234, Cantidad=12, Nombre="chev5", Marca="vadfasdf"},
-
-                    }
-                }
-            };
+            //var cervezasOrdening = cervezas.OrderBy(x => x.Marca);
 
 
-            var bar = (from d in bares where d.CervezaList.Where(c => c.Nombre == "cheve3").Count() > 0 select d).ToList();
+            ////Linq mas detallado.
+            ////Se utiliza para realizar consultas.
+
+            //List<Bar> bares = new List<Bar>()
+            //{
+            //    new Bar ("el bar")
+            //    {
+            //        CervezaList = new List<Cerveza>()
+            //        {
+            //            new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
+            //            new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve2", Marca="vadfasdf3"},
+            //            new Cerveza(){Alcohol=234, Cantidad=12, Nombre="cheve", Marca="vadfasdf"},
+
+            //        }
+            //    },
+
+            //    new Bar ("el bar2")
+            //    {
+            //        CervezaList = new List<Cerveza>()
+            //        {
+            //            new Cerveza(){Alcohol=12, Cantidad=12, Nombre="cheve3", Marca="vadfasdf"},
+            //            new Cerveza(){Alcohol=23, Cantidad=11, Nombre="cheve4", Marca="vadfasdf3"},
+            //            new Cerveza(){Alcohol=234, Cantidad=12, Nombre="chev5", Marca="vadfasdf"},
+
+            //        }
+            //    }
+            //};
+
+
+            //var bar = (from d in bares where d.CervezaList.Where(c => c.Nombre == "cheve3").Count() > 0 select d).ToList();
 
 
             //var bar2 = (from d in bares where d.CervezaList.Where(c => c.Nombre == "cheve3").Count() > 0
@@ -197,6 +201,56 @@ namespace fundamentos
             //{
             //    bebidas = (from c in d.CervezaList select new Bebida(c.Nombre, c.Cantidad).ToList()
             //}.ToList();
+            try
+            {
+                var searcherBeer = new SearcherBeer();
+                var cantidad = searcherBeer.GetCantidad("csdds");
+            }
+            catch (FieldAccessException ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (NotFoundBeerException ex){
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("siempre se ejecuta");
+            }
+            //recibe un string y regresa un int
+            Func<string, int> mostrar2 = Show;
+
+
+            //Action no regresa nada
+            Action<string, string> mostrar = Show;
+
+            //delegados
+            Mostrar mostrar3 = Show;
+            HacerAlgo(mostrar);
+
+
+        }
+        public static void HacerAlgo(Action<string, string> funcionFinal)
+        {
+            funcionFinal("Se envio desde otra funcion","dsadsd");
+
+        }
+
+            public static int Show(string cad)
+            {
+                return cad.Count();
+                //Console.WriteLine("hola"+ cad);
+            }
+
+        public static void Show (string cad, string  cad2)
+        {
+            Console.WriteLine("hola"+ cad);
 
         }
 
