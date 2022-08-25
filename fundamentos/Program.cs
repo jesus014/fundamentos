@@ -8,8 +8,14 @@ namespace fundamentos
 {
     class Program
     {
-         public delegate string Mostrar(string cadena);
+        public delegate string Mostrar(string cadena);
 
+        public class Beer
+        {
+            public string Name { get; set; }
+            public int Alcohol { get; set; }
+
+        }
         static async Task Main(string[] args)
         {
 
@@ -201,58 +207,90 @@ namespace fundamentos
             //{
             //    bebidas = (from c in d.CervezaList select new Bebida(c.Nombre, c.Cantidad).ToList()
             //}.ToList();
-            try
+            //    try
+            //    {
+            //        var searcherBeer = new SearcherBeer();
+            //        var cantidad = searcherBeer.GetCantidad("csdds");
+            //    }
+            //    catch (FieldAccessException ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+
+            //    }
+            //    catch (NotFoundBeerException ex){
+            //        Console.WriteLine(ex.Message);
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //    finally
+            //    {
+            //        Console.WriteLine("siempre se ejecuta");
+            //    }
+            //    //recibe un string y regresa un int
+            //    Func<string, int> mostrar2 = Show;
+
+
+            //    //Action no regresa nada
+            //    Action<string, string> mostrar = Show;
+
+            //    //delegados
+            //    Mostrar mostrar3 = Show;
+            //    HacerAlgo(mostrar);
+
+
+            //}
+            //public static void HacerAlgo(Action<string, string> funcionFinal)
+            //{
+            //    funcionFinal("Se envio desde otra funcion","dsadsd");
+
+            //}
+
+            //    public static int Show(string cad)
+            //    {
+            //        return cad.Count();
+            //        //Console.WriteLine("hola"+ cad);
+            //    }
+
+            //public static void Show (string cad, string  cad2)
+            //{
+            //    Console.WriteLine("hola"+ cad);
+
+            //}
+            
+            //el predicado solo regresa un true o false.
+            var numbers = new List<int> { 1,123,12312,3123,132};
+
+            //creacion del predicado
+            var predicado = new Predicate<int>(IsDivider2);
+            var predicado2 = new Predicate<int>(x => x % 2 == 0);
+
+            //creacion de predicado negativo
+            Predicate<int> negativePredicate = x => !predicado(x);
+
+            var divisibles2 = numbers.FindAll(predicado);
+
+            divisibles2.ForEach(x => { Console.WriteLine(x); });
+
+
+
+            var beers = new List<Beer>()
             {
-                var searcherBeer = new SearcherBeer();
-                var cantidad = searcherBeer.GetCantidad("csdds");
-            }
-            catch (FieldAccessException ex)
-            {
-                Console.WriteLine(ex.Message);
+                new Beer(){Name ="UNA", Alcohol=7},
+                new Beer(){Name="dos", Alcohol=1}
+            };
 
-            }
-            catch (NotFoundBeerException ex){
-                Console.WriteLine(ex.Message);
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("siempre se ejecuta");
-            }
-            //recibe un string y regresa un int
-            Func<string, int> mostrar2 = Show;
-
-
-            //Action no regresa nada
-            Action<string, string> mostrar = Show;
-
-            //delegados
-            Mostrar mostrar3 = Show;
-            HacerAlgo(mostrar);
-
-
+            ShowBeerThat(beers, x => x.Alcohol >= 5);
         }
-        public static void HacerAlgo(Action<string, string> funcionFinal)
+
+        static bool IsDivider2(int x) => x% 2 == 0;
+
+        static void ShowBeerThat(List<Beer> beers, Predicate<Beer> condicion)
         {
-            funcionFinal("Se envio desde otra funcion","dsadsd");
-
+            var evilBeers= beers.FindAll(condicion).ToList();
+            evilBeers.ForEach(x => { Console.WriteLine(x.Name); });
         }
-
-            public static int Show(string cad)
-            {
-                return cad.Count();
-                //Console.WriteLine("hola"+ cad);
-            }
-
-        public static void Show (string cad, string  cad2)
-        {
-            Console.WriteLine("hola"+ cad);
-
-        }
-
     }
 }
